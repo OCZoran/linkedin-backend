@@ -1,24 +1,45 @@
-import { IsNotEmpty } from 'class-validator';
+import {
+  IsDate,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Matches,
+  MinLength,
+} from 'class-validator';
+import { Gender } from 'src/users/enum/gender.enum';
 
 export class UpdateUserDto {
-  @IsNotEmpty()
+  @IsOptional()
+  @IsEmail()
   email?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
+  @MinLength(8)
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/, {
+    message:
+      'Password must contain at least one uppercase letter, one lowercase letter, and one number.',
+  })
   password?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   name?: string;
 
-  @IsNotEmpty()
-  gender?: string;
+  @IsOptional()
+  @IsEnum(Gender)
+  gender: Gender;
 
-  @IsNotEmpty()
+  @IsOptional()
   region?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   phoneNumber?: number;
 
-  @IsNotEmpty()
+  @IsDate()
+  @IsOptional()
   createdAt?: Date;
 }

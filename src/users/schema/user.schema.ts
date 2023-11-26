@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { now, Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
+import { now } from 'mongoose';
 
 // OLX SHOP REGISTRATION CAN COME LATER
 // Research about mappers
@@ -10,8 +10,7 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
-  // @Prop({ type: mongoose.Types.ObjectId })
-  // _id: string;
+  _id?: string;
 
   @Prop({ required: true })
   email: string;
