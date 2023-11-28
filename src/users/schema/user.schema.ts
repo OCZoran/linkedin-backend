@@ -1,6 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { now, Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
+import { now } from 'mongoose';
+import { Gender } from 'src/users/enum/gender.enum';
+import { Place } from 'src/users/enum/place.enum';
+import { Region } from 'src/users/enum/region.enum';
 
 // OLX SHOP REGISTRATION CAN COME LATER
 // Research about mappers
@@ -10,8 +13,7 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
-  // @Prop({ type: mongoose.Types.ObjectId })
-  // _id: string;
+  _id?: string;
 
   @Prop({ required: true })
   email: string;
@@ -22,19 +24,16 @@ export class User {
   @Prop({ required: true })
   name: string;
 
-  // enum
   @Prop({ required: true })
-  gender: string;
+  gender: Gender;
 
-  // enum
   @Prop({ required: true })
-  region: string;
+  region: Region;
 
-  // for verification and email also ( think which one )
   @Prop({ required: true })
-  phoneNumber: number;
+  place: Place;
 
-  @Prop({ default: now(), required: true })
+  @Prop({ default: now() })
   createdAt: Date;
 }
 

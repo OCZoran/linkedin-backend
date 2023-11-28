@@ -1,24 +1,30 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsDate, IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
+import { Gender } from 'src/users/enum/gender.enum';
+import { Place } from 'src/users/enum/place.enum';
+import { Region } from 'src/users/enum/region.enum';
 
 export class UpdateUserDto {
-  @IsNotEmpty()
+  @IsOptional()
+  @IsEmail()
   email?: string;
 
-  @IsNotEmpty()
-  password?: string;
-
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   name?: string;
 
-  @IsNotEmpty()
-  gender?: string;
+  @IsOptional()
+  @IsEnum(Gender)
+  gender?: Gender;
 
-  @IsNotEmpty()
+  @IsOptional()
+  @IsEnum(Region)
   region?: string;
 
-  @IsNotEmpty()
-  phoneNumber?: number;
+  @IsOptional()
+  @IsEnum(Place)
+  place?: number;
 
-  @IsNotEmpty()
+  @IsDate()
+  @IsOptional()
   createdAt?: Date;
 }
