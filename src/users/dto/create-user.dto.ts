@@ -3,12 +3,13 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
-  IsNumber,
   IsString,
   Matches,
   MinLength,
 } from 'class-validator';
 import { Gender } from 'src/users/enum/gender.enum';
+import { Place } from 'src/users/enum/place.enum';
+import { Region } from 'src/users/enum/region.enum';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -32,13 +33,12 @@ export class CreateUserDto {
   gender: Gender;
 
   @IsNotEmpty()
+  @IsEnum(Region)
   region: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  phoneNumber: number;
+  @IsEnum(Place)
+  place: number;
 
-  @IsDate()
-  @IsNotEmpty()
   createdAt: Date;
 }

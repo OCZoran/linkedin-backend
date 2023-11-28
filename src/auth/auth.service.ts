@@ -19,15 +19,14 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user = await this.usersService.findByEmail(email);
-
-    if (!user) {
-      throw new NotFoundException('email', email);
-    }
-
     const passwordMatch = await bcrypt.compare(password, user.password);
 
+    if (!user) {
+      throw new NotFoundException('email not found', email);
+    }
+
     if (!passwordMatch) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Passwords do not match');
     }
 
     const payload = { sub: user._id, email: user.email };
